@@ -1,0 +1,17 @@
+#Moderator0#
+s:Ge/Moderator0/Type     = "TsBox"
+s:Ge/Moderator0/Parent   = "World"
+s:Ge/Moderator0/Material = "C31H64" 
+d:Ge/Moderator0/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Moderator0/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Moderator0/HLZ      = 6. cm
+d:Ge/Moderator0/TransX   = 0. cm
+d:Ge/Moderator0/TransY   = 0. cm
+d:Ge/Moderator0/TransZ   = 0. cm
+d:Ge/Moderator0/RotX     = 0. deg
+d:Ge/Moderator0/RotY     = 0. deg
+d:Ge/Moderator0/RotZ     = 0. deg
+i:Sc/Moderator0/XBins = 100
+i:Sc/Moderator0/YBins = 100
+i:Sc/Moderator0/ZBins = 100
+s:Ge/Moderator0/Color    = "pink"

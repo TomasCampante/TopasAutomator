@@ -1,0 +1,50 @@
+s:Sc/EnergyAtGasGap00/Quantity                  = "EnergyDeposit"
+s:Sc/EnergyAtGasGap00/Component                 = "GasGap00"
+b:Sc/EnergyAtGasGap00/OutputToConsole           = "TRUE"
+s:Sc/EnergyAtGasGap00/IfOutputFileAlreadyExists = "Overwrite"
+d:Sc/EnergyATGasGap00/OnlyIncludeParticlesWithInitialKEAbove = 10. eV #verificar qual o valor de energia do Andrey
+
+s:Sc/EnergyAtGasGap01/Quantity                  = "EnergyDeposit"
+s:Sc/EnergyAtGasGap01/Component                 = "GasGap01"
+b:Sc/EnergyAtGasGap01/OutputToConsole           = "TRUE"
+s:Sc/EnergyAtGasGap01/IfOutputFileAlreadyExists = "Overwrite"
+d:Sc/EnergyATGasGap01/OnlyIncludeParticlesWithInitialKEAbove = 10. eV #verificar qual o valor de energia do Andrey 
+
+### PhaseSpace no GasGap00 ###
+
+s:Sc/PSpace00/Quantity                    = "PhaseSpace"
+b:Sc/PSpace00/OutputToConsole             = "True"
+s:Sc/PSpace00/Surface                     = "GasGap00/ZMinusSurface"
+s:Sc/PSpace00/OutputType                  = "ROOT" # ASCII, Binary, Limited or ROOT 
+s:Sc/PSpace00/OutputFile                  = "PSpace00"
+i:Sc/PSpace00/OutputBufferSize            = 1000
+s:Sc/PSpace00/IfOutputFileAlreadyExists = "Overwrite"
+sv:Sc/PSpace00/OnlyIncludeParticlesNamed = 1 "neutron"
+b:Sc/PSpace00/IncludePhysicalProcessName  = "True"
+b:Sc/PSpace00/IncludeEventID = "True"
+b:Sc/PSpace00/IncludeTrackID = "True"
+b:Sc/PSpace00/IncludeParentID = "False"
+b:Sc/PSpace00/IncludeStepNumber = "False"
+b:Sc/PSpace00/IncludeGlobalTime = "False"
+b:Sc/PSpace00/IncludeEnergyDeposited = "True"
+b:Sc/PSpace00/IncludeVolumeName = "True"
+
+
+### PhaseSpace no GasGap01 ###
+
+s:Sc/PSpace01/Quantity                    = "PhaseSpace"
+b:Sc/PSpace01/OutputToConsole             = "True"
+s:Sc/PSpace01/Surface                     = "GasGap01/ZMinusSurface"
+s:Sc/PSpace01/OutputType                  = "ROOT" # ASCII, Binary, Limited or ROOT 
+s:Sc/PSpace01/OutputFile                  = "PSpace01"
+i:Sc/PSpace01/OutputBufferSize            = 1000
+s:Sc/PSpace01/IfOutputFileAlreadyExists = "Overwrite"
+sv:Sc/PSpace01/OnlyIncludeParticlesNamed = 1 "neutron"
+b:Sc/PSpace01/IncludePhysicalProcessName  = "True"
+b:Sc/PSpace01/IncludeEventID = "True"
+b:Sc/PSpace01/IncludeTrackID = "True"
+b:Sc/PSpace01/IncludeParentID = "False"
+b:Sc/PSpace01/IncludeStepNumber = "False"
+b:Sc/PSpace01/IncludeGlobalTime = "False"
+b:Sc/PSpace01/IncludeEnergyDeposited = "True"
+b:Sc/PSpace01/IncludeVolumeName = "True"

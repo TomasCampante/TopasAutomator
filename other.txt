@@ -1,0 +1,36 @@
+### World ###
+s:Ge/World/Type     = "TsBox"
+s:Ge/World/Material = "Vacuum"
+d:Ge/World/HLX      = 5. cm
+d:Ge/World/HLY      = 5. cm
+d:Ge/World/HLZ      = 5. cm
+d:Ge/World/TransX   = 0. cm
+d:Ge/World/TransY   = 0. cm
+d:Ge/World/TransZ   = 0. cm
+d:Ge/World/RotX     = 0. deg
+d:Ge/World/RotY     = 0. deg
+d:Ge/World/RotZ     = 0. deg
+
+
+s:Gr/ViewA/Type             = "OpenGL"
+i:Gr/ViewA/WindowSizeX      = 1024
+i:Gr/ViewA/WindowSizeY      = 768
+b:Gr/ViewA/IncludeAxes      = "True"
+d:Gr/ViewA/Theta            = 55 deg
+d:Gr/ViewA/Phi              = 20 deg
+s:Gr/ViewA/Projection       = "Perspective"
+d:Gr/ViewA/PerspectiveAngle = 30 deg
+u:Gr/ViewA/Zoom             = 1.
+d:Gr/ViewA/AxesSize = 5. cm # size of axes
+s:Gr/ViewA/ColorBy = "ParticleType"
+
+#sv:Ph/Default/Modules = 1 "g4h-phy_QGSP_BIC_HP"
+sv:Ph/Default/Modules = 5 "g4h-elastic_HP", "g4h-phy_FTFP_BERT_HP", "g4h-phy_QGSP_BIC_HP", "g4h-phy_QGSP_BERT_HP", "g4h-phy_QGSP_BIC_AllHP"
+
+Ts/UseQt = "True"
+
+b:Ts/PauseBeforeQuit = "True"
+
+d:Ge/RPC/HalfSide = 5. cm
+
+d:Ph/Default/CutForNeutron = 0.0 um

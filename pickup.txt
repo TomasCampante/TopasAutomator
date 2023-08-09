@@ -1,0 +1,163 @@
+#Pickup00#
+s:Ge/Pickup00/Type     = "TsBox"
+s:Ge/Pickup00/Parent   = "World"
+s:Ge/Pickup00/Material = "Copper" 
+d:Ge/Pickup00/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Pickup00/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Pickup00/HLZ      = 0.0001 cm
+d:Ge/Pickup00/TransX   = 0. cm
+d:Ge/Pickup00/TransY   = 0. cm
+d:Ge/Pickup00/TransZ   = 0.0001 cm
+d:Ge/Pickup00/RotX     = 0. deg
+d:Ge/Pickup00/RotY     = 0. deg
+d:Ge/Pickup00/RotZ     = 0. deg
+i:Sc/Pickup00/XBins = 100
+i:Sc/Pickup00/YBins = 100
+i:Sc/Pickup00/ZBins = 100
+s:Ge/Pickup00/Color    = "white"
+
+
+
+#Glass00#
+s:Ge/Glass00/Type     = "TsBox"
+s:Ge/Glass00/Parent   = "World"
+s:Ge/Glass00/Material = "LimeGlass" 
+d:Ge/Glass00/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Glass00/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Glass00/HLZ      = 0.014 cm
+d:Ge/Glass00/TransX   = 0. cm
+d:Ge/Glass00/TransY   = 0. cm
+d:Ge/Glass00/TransZ   = 0.0142 cm
+d:Ge/Glass00/RotX     = 0. deg
+d:Ge/Glass00/RotY     = 0. deg
+d:Ge/Glass00/RotZ     = 0. deg
+i:Sc/Glass00/XBins = 100
+i:Sc/Glass00/YBins = 100
+i:Sc/Glass00/ZBins = 100
+s:Ge/Glass00/Color    = "red"
+
+#GasGap00#
+s:Ge/GasGap00/Type     = "TsBox"
+s:Ge/GasGap00/Parent   = "World"
+s:Ge/GasGap00/Material = "C2F4H2" 
+d:Ge/GasGap00/HLX      = Ge/RPC/HalfSide cm
+d:Ge/GasGap00/HLY      = Ge/RPC/HalfSide cm
+d:Ge/GasGap00/HLZ      = 0.0175 cm
+d:Ge/GasGap00/TransX   = 0. cm
+d:Ge/GasGap00/TransY   = 0. cm
+d:Ge/GasGap00/TransZ   = 0.0457 cm
+d:Ge/GasGap00/RotX     = 0. deg
+d:Ge/GasGap00/RotY     = 0. deg
+d:Ge/GasGap00/RotZ     = 0. deg
+i:Sc/GasGap00/XBins = 100
+i:Sc/GasGap00/YBins = 100
+i:Sc/GasGap00/ZBins = 100
+s:Ge/GasGap/Color    = "orange"
+
+#Converter00#
+s:Ge/Converter00/Type     = "TsBox"
+s:Ge/Converter00/Parent   = "World"
+s:Ge/Converter00/Material = "B4C" 
+d:Ge/Converter00/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Converter00/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Converter00/HLZ      = 0.0000375 cm
+d:Ge/Converter00/TransX   = 0. cm
+d:Ge/Converter00/TransY   = 0. cm
+d:Ge/Converter00/TransZ   = 0.0632375 cm
+d:Ge/Converter00/RotX     = 0. deg
+d:Ge/Converter00/RotY     = 0. deg
+d:Ge/Converter00/RotZ     = 0. deg
+i:Sc/Converter00/XBins = 100
+i:Sc/Converter00/YBins = 100
+i:Sc/Converter00/ZBins = 100
+s:Ge/Converter00/Color    = "yellow"
+
+#Cathode0#
+s:Ge/Cathode0/Type     = "TsBox"
+s:Ge/Cathode0/Parent   = "World"
+s:Ge/Cathode0/Material = "Aluminium" 
+d:Ge/Cathode0/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Cathode0/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Cathode0/HLZ      = 0.025 cm
+d:Ge/Cathode0/TransX   = 0. cm
+d:Ge/Cathode0/TransY   = 0. cm
+d:Ge/Cathode0/TransZ   = 0.088275 cm
+d:Ge/Cathode0/RotX     = 0. deg
+d:Ge/Cathode0/RotY     = 0. deg
+d:Ge/Cathode0/RotZ     = 0. deg
+i:Sc/Cathode0/XBins = 100
+i:Sc/Cathode0/YBins = 100
+i:Sc/Cathode0/ZBins = 100
+s:Ge/Cathode0/Color    = "green"
+
+#Converter01#
+s:Ge/Converter01/Type     = "TsBox"
+s:Ge/Converter01/Parent   = "World"
+s:Ge/Converter01/Material = "B4C" 
+d:Ge/Converter01/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Converter01/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Converter01/HLZ      = 0.0000375 cm
+d:Ge/Converter01/TransX   = 0. cm
+d:Ge/Converter01/TransY   = 0. cm
+d:Ge/Converter01/TransZ   = 0.1133125 cm
+d:Ge/Converter01/RotX     = 0. deg
+d:Ge/Converter01/RotY     = 0. deg
+d:Ge/Converter01/RotZ     = 0. deg
+i:Sc/Converter01/XBins = 100
+i:Sc/Converter01/YBins = 100
+i:Sc/Converter01/ZBins = 100
+s:Ge/Converter01/Color    = "lightblue"
+
+#GasGap01#
+s:Ge/GasGap01/Type     = "TsBox"
+s:Ge/GasGap01/Parent   = "World"
+s:Ge/GasGap01/Material = "C2F4H2" 
+d:Ge/GasGap01/HLX      = Ge/RPC/HalfSide cm
+d:Ge/GasGap01/HLY      = Ge/RPC/HalfSide cm
+d:Ge/GasGap01/HLZ      = 0.0175 cm
+d:Ge/GasGap01/TransX   = 0. cm
+d:Ge/GasGap01/TransY   = 0. cm
+d:Ge/GasGap01/TransZ   = 0.13085 cm
+d:Ge/GasGap01/RotX     = 0. deg
+d:Ge/GasGap01/RotY     = 0. deg
+d:Ge/GasGap01/RotZ     = 0. deg
+i:Sc/GasGap01/XBins = 100
+i:Sc/GasGap01/YBins = 100
+i:Sc/GasGap01/ZBins = 100
+s:Ge/GasGap01/Color    = "blue"
+
+#Glass01#
+s:Ge/Glass01/Type     = "TsBox"
+s:Ge/Glass01/Parent   = "World"
+s:Ge/Glass01/Material = "LimeGlass" 
+d:Ge/Glass01/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Glass01/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Glass01/HLZ      = 0.014 cm
+d:Ge/Glass01/TransX   = 0. cm
+d:Ge/Glass01/TransY   = 0. cm
+d:Ge/Glass01/TransZ   = 0.16235 cm
+d:Ge/Glass01/RotX     = 0. deg
+d:Ge/Glass01/RotY     = 0. deg
+d:Ge/Glass01/RotZ     = 0. deg
+i:Sc/Glass01/XBins = 100
+i:Sc/Glass01/YBins = 100
+i:Sc/Glass01/ZBins = 100
+s:Ge/Glass01/Color    = "purple"
+
+#Pickup01#
+s:Ge/Pickup01/Type     = "TsBox"
+s:Ge/Pickup01/Parent   = "World"
+s:Ge/Pickup01/Material = "Copper" 
+d:Ge/Pickup01/HLX      = Ge/RPC/HalfSide cm
+d:Ge/Pickup01/HLY      = Ge/RPC/HalfSide cm
+d:Ge/Pickup01/HLZ      = 0.0001 cm
+d:Ge/Pickup01/TransX   = 0. cm
+d:Ge/Pickup01/TransY   = 0. cm
+d:Ge/Pickup01/TransZ   = 0.17645 cm
+d:Ge/Pickup01/RotX     = 0. deg
+d:Ge/Pickup01/RotY     = 0. deg
+d:Ge/Pickup01/RotZ     = 0. deg
+i:Sc/Pickup01/XBins = 100
+i:Sc/Pickup01/YBins = 100
+i:Sc/Pickup01/ZBins = 100
+s:Ge/Pickup01/Color    = "white"

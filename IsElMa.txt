@@ -1,0 +1,351 @@
+#b:Ma//NormalizeFractions = "True" # Normalizes the material fractions
+
+
+### Aluminium ###
+d:Ma/Aluminium/Density = 2.7 g/cm3
+sv:Ma/Aluminium/Components = 1 "MyAluminium" 
+uv:Ma/Aluminium/Fractions = 1 1. 
+
+
+s:El/MyAluminium/Symbol             = "MyAluminium"
+sv:El/MyAluminium/IsotopeNames      = 1 "Al27" 
+uv:El/MyAluminium/IsotopeAbundances = 1 1.
+
+### 27 Aluminium ###
+i:Is/Al27/Z = 13
+i:Is/Al27/N = 27
+d:Is/Al27/A = 26.982 g/mole
+
+### Boron ###
+d:Ma/Boron/Density = 2.3 g/cm3
+sv:Ma/Boron/Components = 1 "Boron" 
+uv:Ma/Boron/Fractions = 1 1. 
+
+s:El/MyBoron/Symbol             = "MyBoron"
+sv:El/MyBoron/IsotopeNames      = 2 "B10" "B11"
+uv:El/MyBoron/IsotopeAbundances = 2 .9706 .0294
+
+### 10 Boron ###
+i:Is/B10/Z = 5
+i:Is/B10/N = 10
+d:Is/B10/A = 10.01 g/mole
+
+### 11 Boron ###
+i:Is/B11/Z = 5
+i:Is/B11/N = 11
+d:Is/B11/A = 11.01 g/mole
+
+### Carbon ###
+d:Ma/Carbon/Density =  1.867 g/cm3
+sv:Ma/Carbon/Components = 1 "Carbon" 
+uv:Ma/Carbon/Fractions = 1 1. 
+
+s:El/MyCarbon/Symbol             = "MyCarbon"
+sv:El/MyCarbon/IsotopeNames      = 2 "C12" "C13"
+uv:El/MyCarbon/IsotopeAbundances = 2 .9893 .0107
+
+### 12 Carbon ###
+i:Is/C12/Z = 6
+i:Is/C12/N = 12
+d:Is/C12/A = 12.01 g/mole
+
+### 13 Carbon ###
+i:Is/C13/Z = 6
+i:Is/C13/N = 13
+d:Is/C13/A = 13.01 g/mole
+
+b:Ma/B4C/NormalizeFractions = "True" # Normalizes the material fractions
+#b:Ma/B4C/BuildFromMaterials = "True"
+d:Ma/B4C/Density = 2.242 g/cm3 
+sv:Ma/B4C/Components = 5 "Boron" "Carbon" "Hydrogen" "Oxygen" "Nitrogen"
+uv:Ma/B4C/Fractions = 5 .817 .17 .007 .004 .002
+
+
+###Soda Lime Glass###
+
+###Calcium###
+d:Ma/Calcium/Density =  1.54 g/cm3
+sv:Ma/Calcium/Components = 1 "MyCalcium" 
+uv:Ma/Calcium/Fractions = 1 1. 
+
+s:El/MyCalcium/Symbol             = "MyCalcium"
+sv:El/MyCalcium/IsotopeNames      = 6 "Ca40" "Ca42" "Ca43" "Ca44" "Ca46" "Ca48"
+uv:El/MyCalcium/IsotopeAbundances = 6 .96941 .00647 .00135 .02086 .00004 .00187
+
+### 40 Calcium ###
+i:Is/Ca40/Z = 20
+i:Is/Ca40/N = 40
+d:Is/Ca40/A = 40.078 g/mole
+
+### 42 Calcium ###
+i:Is/Ca42/Z = 20
+i:Is/Ca42/N = 42
+d:Is/Ca42/A = 42.078 g/mole
+
+### 43 Calcium ###
+i:Is/Ca43/Z = 20
+i:Is/Ca43/N = 43
+d:Is/Ca43/A = 43.078 g/mole
+
+### 44 Calcium ###
+i:Is/Ca44/Z = 20
+i:Is/Ca44/N = 44
+d:Is/Ca44/A = 44.078 g/mole
+
+### 46 Calcium ###
+i:Is/Ca46/Z = 20
+i:Is/Ca46/N = 46
+d:Is/Ca46/A = 46.078 g/mole
+
+### 48 Calcium ###
+i:Is/Ca48/Z = 20
+i:Is/Ca48/N = 48
+d:Is/Ca48/A = 48.078 g/mole
+
+
+### Potassium ###
+d:Ma/Potassium/Density =  1.54 g/cm3
+sv:Ma/Potassium/Components = 1 "MyPotassium" 
+uv:Ma/Potassium/Fractions = 1 1. 
+
+s:El/MyPotassium/Symbol             = "MyPotassium"
+sv:El/MyPotassium/IsotopeNames      = 3 "K39" "K40" "K41" 
+uv:El/MyPotassium/IsotopeAbundances = 3 .932581 .000117 .067302
+
+### 39 Potassium ###
+i:Is/K39/Z = 19
+i:Is/K39/N = 39
+d:Is/K39/A = 39.098 g/mole
+
+### 40 Potassium ###
+i:Is/K40/Z = 19
+i:Is/K40/N = 40
+d:Is/K40/A = 40.098 g/mole
+
+### 41 Potassium ###
+i:Is/K41/Z = 19
+i:Is/K41/N = 41
+d:Is/K41/A = 41.098 g/mole
+
+### Magnesium ###
+d:Ma/Magnesium/Density =  1.74 g/cm3
+sv:Ma/Magnesium/Components = 1 "MyMagnesium" 
+uv:Ma/Magnesium/Fractions = 1 1. 
+
+s:El/MyMagnesium/Symbol             = "MyMagnesium"
+sv:El/MyMagnesium/IsotopeNames      = 3 "Mg24" "Mg25" "Mg26" 
+uv:El/MyMagnesium/IsotopeAbundances = 3 .7899 .10 .1101
+
+### 24 Magnesium ###
+i:Is/Mg24/Z = 12
+i:Is/Mg24/N = 24
+d:Is/Mg24/A = 24.305 g/mole
+
+### 25 Magnesium ###
+i:Is/Mg25/Z = 12
+i:Is/Mg25/N = 25
+d:Is/Mg25/A = 25.305 g/mole
+
+### 26 Magnesium ###
+i:Is/Mg26/Z = 12
+i:Is/Mg26/N = 26
+d:Is/Mg26/A = 26.305 g/mole
+
+### Oxygen ###
+d:Ma/Oxygen/Density =  0.001308  g/cm3
+sv:Ma/Oxygen/Components = 1 "Oxygen" 
+uv:Ma/Oxygen/Fractions = 1 1. 
+
+s:El/MyOxygen/Symbol             = "MyOxygen"
+sv:El/MyOxygen/IsotopeNames      = 3 "O16" "O17" "O18" 
+uv:El/MyOxygen/IsotopeAbundances = 3 .99757 .00038 .00205
+
+### 16 Oxygen ###
+i:Is/O16/Z = 8
+i:Is/O16/N = 16
+d:Is/O16/A = 15.999 g/mole
+
+### 17 Oxygen ###
+i:Is/O17/Z = 8
+i:Is/O17/N = 17
+d:Is/O17/A = 16.999 g/mole
+
+### 18 Oxygen ###
+i:Is/O18/Z = 8
+i:Is/O18/N = 18
+d:Is/O18/A = 17.999 g/mole
+
+### Silicon ###
+d:Ma/Silicon/Density =  2.3296  g/cm3
+sv:Ma/Silicon/Components = 1 "MySilicon" 
+uv:Ma/Silicon/Fractions = 1 1. 
+
+s:El/MySilicon/Symbol             = "MySilicon"
+sv:El/MySilicon/IsotopeNames      = 3 "Si28" "Si29" "Si30" 
+uv:El/MySilicon/IsotopeAbundances = 3 .922297 .046833 .03087
+
+### 28 Silicon ###
+i:Is/Si28/Z = 14
+i:Is/Si28/N = 28
+d:Is/Si28/A = 28.085 g/mole
+
+### 29 Silicon ###
+i:Is/Si29/Z = 14
+i:Is/Si29/N = 29
+d:Is/Si29/A = 29.085 g/mole
+
+### 30 Silicon ###
+i:Is/Si30/Z = 14
+i:Is/Si30/N = 30
+d:Is/Si30/A = 30.085 g/mole
+
+
+b:Ma/SiO2/NormalizeFractions = "True" # Normalizes the material fractions
+#b:Ma/SiO2/BuildFromMaterials = "True"
+d:Ma/SiO2/Density = 2.65 g/cm3 
+sv:Ma/SiO2/Components = 2 "MySilicon" "MyOxygen" 
+uv:Ma/SiO2/Fractions = 2 29. 34.
+
+
+
+b:Ma/Na2O/NormalizeFractions = "True" # Normalizes the material fractions
+#b:Ma/Na2O/BuildFromMaterials = "True"
+d:Ma/Na2O/Density = 2.27 g/cm3 
+sv:Ma/Na2O/Components = 2 "Sodium" "MyOxygen" 
+uv:Ma/Na2O/Fractions = 2 46. 17.
+
+
+
+b:Ma/CaO/NormalizeFractions = "True" # Normalizes the material fractions
+#b:Ma/CaO/BuildFromMaterials = "True"
+d:Ma/CaO/Density = 2.27 g/cm3 
+sv:Ma/CaO/Components = 2 "MyCalcium" "MyOxygen" 
+uv:Ma/CaO/Fractions = 2 43.078 17.
+
+
+b:Ma/MgO/NormalizeFractions = "True" # Normalizes the material fractions
+#b:Ma/MgO/BuildFromMaterials = "True"
+d:Ma/MgO/Density = 3.58 g/cm3 
+sv:Ma/MgO/Components = 2 "MyMagnesium" "MyOxygen" 
+uv:Ma/MgO/Fractions = 2 25.305 17.
+
+
+b:Ma/Al2O3/NormalizeFractions = "True" # Normalizes the material fractions
+#b:Ma/Al2O3/BuildFromMaterials = "True"
+d:Ma/Al2O3/Density = 3.95 g/cm3 
+sv:Ma/Al2O3/Components = 2 "MyAluminium" "MyOxygen" 
+uv:Ma/Al2O3/Fractions = 2 53.964 51.
+
+
+b:Ma/K2O/NormalizeFractions = "True" # Normalizes the material fractions
+#b:Ma/K2O/BuildFromMaterials = "True"
+d:Ma/K2O/Density = 3.95 g/cm3 
+sv:Ma/K2O/Components = 2 "MyPotassium" "MyOxygen" 
+uv:Ma/K2O/Fractions = 2 80.196 17.
+
+
+
+b:Ma/LimeGlass/NormalizeFractions = "True" # Normalizes the material fractions
+b:Ma/LimeGlass/BuildFromMaterials = "True"
+d:Ma/LimeGlass/Density = 2.53 g/cm3 
+sv:Ma/LimeGlass/Components = 6 "SiO2" "Na2O" "CaO" "MgO" "Al2O3" "K2O"
+uv:Ma/LimeGlass/Fractions = 6 .7298 .14 .07 .04 .02 .0002
+
+
+### Kapton ###
+### Hydrogen ###
+d:Ma/Hydrogen/Density =  0.000082  g/cm3
+sv:Ma/Hydrogen/Components = 1 "Hydrogen" 
+uv:Ma/Hydrogen/Fractions = 1 1. 
+
+s:El/MyHydrogen/Symbol             = "MyHydrogen"
+sv:El/MyHydrogen/IsotopeNames      = 2 "H1" "H2" 
+uv:El/MyHydrogen/IsotopeAbundances = 2 .999885 .000115
+
+### 1 Hydrogen ###
+i:Is/H1/Z = 1
+i:Is/H1/N = 2
+d:Is/H1/A = 1.008 g/mole
+
+### 2 Hydrogen ###
+i:Is/H2/Z = 1
+i:Is/H2/N = 3
+d:Is/H2/A = 2.008 g/mole
+
+
+### Nitrogen ###
+d:Ma/Nitrogen/Density =  0.001145   g/cm3
+sv:Ma/Nitrogen/Components = 1 "Nitrogen" 
+uv:Ma/Nitrogen/Fractions = 1 1. 
+
+s:El/MyNitrogen/Symbol             = "MyNitrogen"
+sv:El/MyNitrogen/IsotopeNames      = 2 "N14" "N15" 
+uv:El/MyNitrogen/IsotopeAbundances = 2 0.99632 0.00368
+
+### 14 Nitrogen ###
+i:Is/N14/Z = 7
+i:Is/N14/N = 14
+d:Is/N14/A = 14.007 g/mole
+
+### 15 Nitrogen ###
+i:Is/N15/Z = 7
+i:Is/N15/N = 15
+d:Is/N15/A = 15.007 g/mole
+
+### C41H22N4O11###
+d:Ma/Kapton/Density = 1.42 g/cm3 
+sv:Ma/Kapton/Components = 4 "MyCarbon" "MyHydrogen" "MyNitrogen" "MyOxygen"
+uv:Ma/Kapton/Fractions = 4 .526 .282 .051 .141
+
+
+### Copper ###
+d:Ma/Copper/Density =  8.96   g/cm3
+sv:Ma/Copper/Components = 1 "Copper" 
+uv:Ma/Copper/Fractions = 1 1. 
+
+s:El/MyCopper/Symbol             = "MyCopper"
+sv:El/MyCopper/IsotopeNames      = 2 "Cu63" "Cu65" 
+uv:El/MyCopper/IsotopeAbundances = 2 .6917 .3083
+
+### 63 Copper ###
+i:Is/Cu63/Z = 29
+i:Is/Cu63/N = 63
+d:Is/Cu63/A = 63.546 g/mole
+
+### 65 Copper ###
+i:Is/Cu65/Z = 29
+i:Is/Cu65/N = 65
+d:Is/Cu65/A = 65.546 g/mole
+
+### Fluorine ###
+d:Ma/Fluorine/Density = 0.001553 g/cm3
+sv:Ma/Fluorine/Components = 1 "Fluorine" 
+uv:Ma/Fluorine/Fractions = 1 1.0 
+
+
+s:El/MyFluorine/Symbol             = "MyFluorine"
+sv:El/MyFluorine/IsotopeNames      = 1 "F19" 
+uv:El/MyFluorine/IsotopeAbundances = 1 1.
+
+### 19 Fluorine ###
+i:Is/F19/Z = 9
+i:Is/F19/N = 19
+d:Is/F19/A = 18.998 g/mole
+
+
+### R134A ###
+d:Ma/C2F4H2/Density = 0.0042405 g/cm3 
+sv:Ma/C2F4H2/Components = 3 "MyCarbon" "MyFluorine" "MyHydrogen" 
+uv:Ma/C2F4H2/Fractions = 3 .25 .5 .25
+
+
+### Paraffin ###
+d:Ma/C31H64/Density =   0.9 g/cm3 
+sv:Ma/C31H64/Components = 2 "MyCarbon" "MyHydrogen"
+uv:Ma/C31H64/Fractions = 2  .3263  .6737
+
+### HDPE ###
+d:Ma/C2H4/Density =   0.95 g/cm3 
+sv:Ma/C2H4/Components = 2 "MyCarbon" "MyHydrogen"
+uv:Ma/C2H4/Fractions = 2  .33  .67
+

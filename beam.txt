@@ -1,0 +1,29 @@
+### Beam position ###
+s:Ge/BeamPosition/Parent = "World"
+s:Ge/BeamPosition/Type = "Group"
+d:Ge/BeamPosition/TransX = 0. m
+d:Ge/BeamPosition/TransY = 0. m
+d:Ge/BeamPosition/TransZ = -5. cm
+d:Ge/BeamPosition/RotX = 0. deg
+d:Ge/BeamPosition/RotY = 0. deg
+d:Ge/BeamPosition/RotZ = 0. deg
+
+### Particle source ###
+s:So/NeutronSource/Type = "Beam" # Beam, Isotropic, Emittance or PhaseSpace
+s:So/NeutronSource/Component = "BeamPosition"
+s:So/NeutronSource/BeamParticle = "neutron"
+d:So/NeutronSource/BeamEnergy = 0.025 eV
+u:So/NeutronSource/BeamEnergySpread = 0.
+s:So/NeutronSource/BeamPositionDistribution = "Flat" # Flat or Gaussian
+s:So/NeutronSource/BeamPositionCutoffShape = "Ellipse" # Point, Ellipse, Rectangle or Isotropic
+d:So/NeutronSource/BeamPositionCutoffX = 0.5 mm
+d:So/NeutronSource/BeamPositionCutoffY = 0.5 mm
+d:So/NeutronSource/BeamPositionSpreadX = 0.3 mm
+d:So/NeutronSource/BeamPositionSpreadY = 0.3 mm
+s:So/NeutronSource/BeamAngularDistribution = "Flat" # Flat or Gaussian
+d:So/NeutronSource/BeamAngularCutoffX = 0.1 deg # almost twice the size of the beam
+d:So/NeutronSource/BeamAngularCutoffY = 0.1 deg
+d:So/NeutronSource/BeamAngularSpreadX = 0.0032 rad
+d:So/NeutronSource/BeamAngularSpreadY = 0.0032 rad
+i:So/NeutronSource/NumberOfHistoriesInRun = 1000
+
