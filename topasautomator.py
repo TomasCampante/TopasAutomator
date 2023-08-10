@@ -3,7 +3,7 @@ from tkinter import messagebox
 import copy
 import auxiliaryFunctions as aux
 from PIL import ImageTk, Image
-
+import subprocess
 
 #####################################################################################################################################
 
@@ -27,9 +27,12 @@ def interface():
 
         try:
             aux.inbetween('2.5 eV', '6 MeV', str(beam_energy.get())+' '+str(units.get()), 'eV')
+            
             file_manipulator(boolean)
         except AssertionError:
             messagebox.showerror("Error", "Inserted values do not respect the asked range.\nRe-input the beam's energy.")
+        except ValueError:
+            messagebox.showerror("Error", "Most entries accept integers or floats, although make sure the number of neutrons is an integer!")
         except Exception:
             messagebox.showerror("Error", "Make sure to fill every relevant entry!")
 
@@ -55,22 +58,22 @@ def interface():
         '''
 
         # Opening the .txt used as reference to run the program
-        other=open('other.txt', "r")
+        other=open('DoNotDelete/other.txt', "r")
         other_lines=other.readlines()
         other.close()
-        iselma=open('IsElMa.txt', "r") #IsElMa = Isotopes+Elements+Materials
+        iselma=open('DoNotDelete/IsElMa.txt', "r") #IsElMa = Isotopes+Elements+Materials
         iselma_lines=iselma.readlines()
         iselma.close()
-        pickup=open('pickup.txt', "r")
+        pickup=open('DoNotDelete/pickup.txt', "r")
         pickup_lines=pickup.readlines()
         pickup.close()
-        beam=open('beam.txt', "r")
+        beam=open('DoNotDelete/beam.txt', "r")
         beam_lines=beam.readlines()
         beam.close()
-        mods=open('moderator.txt', "r")
+        mods=open('DoNotDelete/moderator.txt', "r")
         mods_lines=mods.readlines()
         mods.close()
-        scorers=open('scorers.txt', "r")
+        scorers=open('DoNotDelete/scorers.txt', "r")
         scorers_lines=scorers.readlines()
         scorers.close()
 
@@ -184,8 +187,8 @@ def interface():
                 if boxsize_index==0:
                     to_write[index]=line[:2+line.find('=')]+str(5+0.2*float(nnrpc.get())+float(thickness_mod.get())*(float(nnrpc.get())+1))+line[line.find(' cm'):]
                     if side_moderator.get()=='True':
-                    	to_write[index-1]=to_write[index-1][:2+line.find('=')]+str(5+2*float(thickness_mod.get()))+line[line.find(' cm'):]
-                    	to_write[index-2]=to_write[index-2][:2+line.find('=')]+str(5+2*float(thickness_mod.get()))+line[line.find(' cm'):]
+                        to_write[index-1]=to_write[index-1][:2+line.find('=')]+str(5+2*float(thickness_mod.get()))+line[line.find(' cm'):]
+                        to_write[index-2]=to_write[index-2][:2+line.find('=')]+str(5+2*float(thickness_mod.get()))+line[line.find(' cm'):]
                 if axis_index==0:
                     if axis.get()=='On':
                         to_write[index]='b:Gr/ViewA/IncludeAxes ="True" \n'
@@ -304,12 +307,23 @@ def interface():
         newfile.writelines(to_write)
         newfile.close()
 
+	    # When the program is being run in the terminal (!), it will open the file or TOPAS with the file that was created.
         if boolean:
-            aux.openTOPAS(filename) 
-
-        return
-
-        
+            subprocess.call('bash -i -c "topas '+filename+'"', shell=True)
+        else:
+            system=aux.opsys()
+            if system == 'Windows':
+                subprocess.call('start ' +filename, shell=True)
+            elif system == 'Darwin':
+                subprocess.call('open ' +filename, shell=True)
+            elif system == 'Linux':
+                subprocess.call('xdg-open ' +filename, shell=True)
+            else:
+                messagebox.showerror("Error", "It was not possible to open the file\nbecause we could not identify your operative system.")
+                
+         
+        return    
+            
     ####################################################################################################################################
         
     '''
@@ -319,16 +333,16 @@ def interface():
 
     # Generating the main window
     main = tk.Tk()
-    main.geometry('750x330')
+    main.geometry('750x350')
     main.title('TOPAS Automator')
-    main.wm_iconphoto(True, ImageTk.PhotoImage(Image.open('topas.png')))
+    main.wm_iconphoto(True, ImageTk.PhotoImage(Image.open('DoNotDelete/topas.png')))
 
     # Generating the menus in the main window
     menu = tk.Menu(main)
     main.config(menu = menu)
     file_menu = tk.Menu(menu, tearoff=False)
     menu.add_cascade(label='Home', menu=file_menu) # When clicked, this button provides more functionalities
-    file_menu.add_command(label='Run', command=lambda:run_topas(True)) # This button is the same as the 'run file' button
+    file_menu.add_command(label='Run', command=lambda:run_topas(True)) # This button is the same as the 'Open with TOPAS' button
     file_menu.add_command(label='Reset', command=lambda:(main.destroy(), interface())) # This button closes the window, and open it again, reseting everything
     file_menu.add_command(label='Exit', command=lambda:main.destroy()) # This button shuts everything down
     menu.add_command(label='About', command=lambda:aux.about_popup(main)) # This button opens a new mini-window (see the called function)
@@ -339,7 +353,7 @@ def interface():
     frame_logos.pack(padx=15,side=tk.RIGHT, fill=tk.Y)
 
     # Processing the logos
-    logos = Image.open("logos_nobg.png")
+    logos = Image.open("DoNotDelete/logos_nobg.png")
     logos.thumbnail((150,150))
     logos = ImageTk.PhotoImage(logos)
     logos_label = tk.Label(frame_logos, image = logos)
@@ -351,19 +365,31 @@ def interface():
     frame_initialsettings.pack(pady=(10,0))
 
     axis=tk.StringVar()
-    axis.set('Axis')
-    drop_axis=tk.OptionMenu(frame_initialsettings, axis, 'On', 'Off')
-    drop_axis.pack()
+    ##axis.set('Axis')
+    ##check_axis=tk.OptionMenu(frame_initialsettings, axis, 'On', 'Off')
+    ##check_axis.pack()
+    check_axis = tk.Checkbutton(frame_initialsettings, text='Do you want to see the axes in the simulation?', variable=axis, offvalue='Off', onvalue='On')
+    check_axis.select() 
+    check_axis.pack()
 
-    nnrpc=tk.StringVar()
-    nnrpc.set('Number of nRPCs')
-    drop_rpcs=tk.OptionMenu(frame_initialsettings, nnrpc, 1, 3, 5, 10)
-    drop_rpcs.pack()
-
-    label = tk.Label(frame_initialsettings, text="Distance between the first RPC and the beam (in cm):")
+    ##nnrpc=tk.StringVar()
+    ##nnrpc.set('Number of nRPCs')
+    ##drop_rpcs=tk.OptionMenu(frame_initialsettings, nnrpc, 1, 3, 5, 10)
+    ##drop_rpcs.pack()
+    
+    label = tk.Label(frame_initialsettings, text="Number of nRPCs:")
     label.pack(side=tk.LEFT)
 
-    distance_rpc_beam = tk.Entry(frame_initialsettings)
+    nnrpc = tk.Scale(frame_initialsettings, from_=1, to=10, orient=tk.HORIZONTAL, length=200)
+    nnrpc.pack(side=tk.LEFT)
+    
+    frame_beamdist=tk.Frame(main)
+    frame_beamdist.pack()
+
+    label = tk.Label(frame_beamdist, text="Distance between the first RPC and the beam (in cm):")
+    label.pack(side=tk.LEFT)
+
+    distance_rpc_beam = tk.Entry(frame_beamdist)
     distance_rpc_beam.pack(side=tk.LEFT)
 
     frame_moderators1=tk.Frame(main)
@@ -434,7 +460,7 @@ def interface():
         Don't mind this function, its only purpose is to keep updating a label.
         '''
 
-        if beam_energy.get()!='' or thickness_mod.get()!='' or nneutrons.get()!='' or distance_rpc_beam.get()!='' or nnrpc.get()!='Number of nRPCs' or units.get()!='Units':
+        if beam_energy.get()!='' or thickness_mod.get()!='' or nneutrons.get()!='' or distance_rpc_beam.get()!='' or nnrpc.get()!='' or units.get()!='Units':
             if moderator.get()=='True':
                 filename_strvar.set('Filename: '+'rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_sidemoderators-'+str(side_moderator.get())+'_'+str(thickness_mod.get())+'cm_'+str(beam_energy.get())+str(units.get())+".txt")
             else:
@@ -446,18 +472,18 @@ def interface():
 
 
     # This piece of code is particulary interesting because it triggers the function above everytime one of the chosen widgets is used
-    for widget in [beam_energy,thickness_mod,nneutrons,distance_rpc_beam,distance_rpc]:
+    for widget in [beam_energy,thickness_mod,nneutrons,distance_rpc_beam,distance_rpc, nnrpc]:
         widget.bind('<KeyRelease>', update_filename)
-    for widget in [drop_units,drop_axis,drop_rpcs] :
+    for widget in [drop_units]:
         widget.bind('<Configure>', update_filename)
-    for widget in [moderators, side_moderators]:
+    for widget in [moderators, check_axis, side_moderators]:
         widget.bind('<ButtonRelease-1>', update_filename)
 
     # The buttons
-    button_save = tk.Button(frame_final, text = "Save file",font=('bold'), command =  lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
-    button_run = tk.Button(frame_final, text = "Run file",font=('bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.LEFT)
+    button_save = tk.Button(frame_final, text = "View content",font=('bold'), command =  lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
+    button_run = tk.Button(frame_final, text = "Open with TOPAS",font=('bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.RIGHT)
 
-    # To open evverything
+    # To open everything
     main.mainloop()
 
     return

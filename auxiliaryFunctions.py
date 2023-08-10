@@ -1,7 +1,13 @@
 import tkinter as tk
 from PIL import ImageTk, Image
 import subprocess
+import platform
 import webbrowser
+
+def opsys():
+    
+    return platform.system()
+
 
 def inbetween(lower, upper, value, units):
 
@@ -112,9 +118,9 @@ def about_popup(tks):
     
     popup_window = tk.Toplevel(tks)
     popup_window.title("About")
-    popup_window.wm_iconphoto(True, ImageTk.PhotoImage(set_image_with_white_background('info.png')))
+    popup_window.wm_iconphoto(True, ImageTk.PhotoImage(set_image_with_white_background('DoNotDelete/info.png')))
 
-    label = tk.Label(popup_window, text="Version 2.2.2")
+    label = tk.Label(popup_window, text="Version 3.0.2")
     label.pack(padx=10, pady=10)
 
     close_button = tk.Button(popup_window, text="Close", command=popup_window.destroy)
@@ -131,7 +137,7 @@ def help_popup(tks):
     
     popup_window = tk.Toplevel(tks)
     popup_window.title("Help")
-    popup_window.wm_iconphoto(True, ImageTk.PhotoImage(set_image_with_white_background('help.png')))
+    popup_window.wm_iconphoto(True, ImageTk.PhotoImage(set_image_with_white_background('DoNotDelete/help.png')))
 
     label = tk.Label(popup_window, text="To learn more about TOPAS Automator,\n left-click on any of these text to read our user guide!")
     label.pack(padx=10, pady=10)
