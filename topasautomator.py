@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import font
 import copy
 import auxiliaryFunctions as aux
 from PIL import ImageTk, Image
@@ -242,6 +243,8 @@ def interface():
                             newline = newline[:2 + newline.find('=')] + str(position) + newline[newline.find(' cm'):]
                         if line.find('TransZ') >= 0:
                             newline = newline[:2 + newline.find('=')] + str(position) + newline[newline.find(' cm'):]
+                        if line.find('/Color') >= 0:
+                            newline = newline[:2 + newline.find('=')] + ' "purple"'
                         #print(newline)
                         new_mods_lines.append(newline)
 
@@ -319,7 +322,7 @@ def interface():
             elif system == 'Linux':
                 subprocess.call('xdg-open ' +filename, shell=True)
             else:
-                messagebox.showerror("Error", "It was not possible to open the file\nbecause we could not identify your operative system.")
+                messagebox.showerror("Error", "It was not possible to open the file because we could not identify your operative system.")
                 
          
         return    
@@ -333,7 +336,7 @@ def interface():
 
     # Generating the main window
     main = tk.Tk()
-    main.geometry('750x350')
+    main.geometry('850x400')
     main.title('TOPAS Automator')
     main.wm_iconphoto(True, ImageTk.PhotoImage(Image.open('DoNotDelete/topas.png')))
 
@@ -360,6 +363,9 @@ def interface():
     logos_label.image = logos
     logos_label.pack(side=tk.TOP, anchor=tk.NE)
 
+    # Creating a customized font
+    my_font = font.Font(size=13)
+
     # The following code creates the widgets necessary to receive the inputs from the user
     frame_initialsettings=tk.Frame(main)
     frame_initialsettings.pack(pady=(10,0))
@@ -377,8 +383,8 @@ def interface():
     ##drop_rpcs=tk.OptionMenu(frame_initialsettings, nnrpc, 1, 3, 5, 10)
     ##drop_rpcs.pack()
     
-    label = tk.Label(frame_initialsettings, text="Number of nRPCs:")
-    label.pack(side=tk.LEFT)
+    label_rpc = tk.Label(frame_initialsettings, text="Number of nRPCs:")
+    label_rpc.pack(side=tk.LEFT)
 
     nnrpc = tk.Scale(frame_initialsettings, from_=1, to=10, orient=tk.HORIZONTAL, length=200)
     nnrpc.pack(side=tk.LEFT)
@@ -386,8 +392,8 @@ def interface():
     frame_beamdist=tk.Frame(main)
     frame_beamdist.pack()
 
-    label = tk.Label(frame_beamdist, text="Distance between the first RPC and the beam (in cm):")
-    label.pack(side=tk.LEFT)
+    label_beamdist = tk.Label(frame_beamdist, text="Distance between the first RPC and the beam (in cm):")
+    label_beamdist.pack(side=tk.LEFT)
 
     distance_rpc_beam = tk.Entry(frame_beamdist)
     distance_rpc_beam.pack(side=tk.LEFT)
@@ -424,8 +430,8 @@ def interface():
     frame_beam=tk.Frame(main)
     frame_beam.pack()
 
-    label = tk.Label(frame_beam, text="Beam's energy (from 2.5e-6 to 6 MeV):")
-    label.grid(row=0, column=0)
+    label_beamenergy = tk.Label(frame_beam, text="Beam's energy (from 2.5e-6 to 6 MeV):")
+    label_beamenergy.grid(row=0, column=0)
 
     beam_energy = tk.Entry(frame_beam)
     beam_energy.grid(row=0, column=1)
@@ -438,8 +444,8 @@ def interface():
     frame_quantity=tk.Frame(main)
     frame_quantity.pack()
 
-    label = tk.Label(frame_quantity, text="Amount of neutrons in beam:")
-    label.pack(side=tk.LEFT)
+    label_nneutrons = tk.Label(frame_quantity, text="Amount of neutrons in beam:")
+    label_nneutrons.pack(side=tk.LEFT)
 
     nneutrons = tk.Entry(frame_quantity)
     nneutrons.pack(side=tk.LEFT)
@@ -453,7 +459,7 @@ def interface():
     filename_strvar.set('Filename: to_run.txt')
     filename_label= tk.Label(frame_final, textvariable= filename_strvar)
     filename_label.pack(pady=(0,20))
-
+    
     def update_filename(event=None):
 
         '''
@@ -480,8 +486,14 @@ def interface():
         widget.bind('<ButtonRelease-1>', update_filename)
 
     # The buttons
-    button_save = tk.Button(frame_final, text = "View content",font=('bold'), command =  lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
-    button_run = tk.Button(frame_final, text = "Open with TOPAS",font=('bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.RIGHT)
+    button_save = tk.Button(frame_final, text = "View content",font=("TkDefaultFont", 12, 'bold'), command =  lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
+    button_run = tk.Button(frame_final, text = "Open with TOPAS",font=("TkDefaultFont", 12, 'bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.RIGHT)
+
+    # Now we'll increase the size of every widget to make the interface bigger
+    for widget in [check_axis, label_rpc, nnrpc, label_beamdist, distance_rpc_beam, moderators, side_moderators, label_thick,
+                   thickness_mod, label_dist, distance_rpc, label_beamenergy, beam_energy, drop_units, label_nneutrons, 
+                   nneutrons, filename_label]:
+        widget.config(font=my_font)
 
     # To open everything
     main.mainloop()
