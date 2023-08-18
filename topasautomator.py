@@ -336,7 +336,7 @@ def interface():
 
     # Generating the main window
     main = tk.Tk()
-    main.geometry('850x400')
+    main.geometry('850x430')
     main.title('TOPAS Automator')
     main.wm_iconphoto(True, ImageTk.PhotoImage(Image.open('DoNotDelete/topas.png')))
 
@@ -453,12 +453,12 @@ def interface():
     # This final frame is special because it contains a label with the name of the file that will be generated
     # It also contains the two principal buttons, vital do run the program
     frame_final=tk.Frame(main)
-    frame_final.pack(pady=(10, 0))
+    frame_final.pack(pady=(20, 0))
 
     filename_strvar=tk.StringVar()
     filename_strvar.set('Filename: to_run.txt')
     filename_label= tk.Label(frame_final, textvariable= filename_strvar)
-    filename_label.pack(pady=(0,20))
+    filename_label.pack(pady=(0,40))
     
     def update_filename(event=None):
 
