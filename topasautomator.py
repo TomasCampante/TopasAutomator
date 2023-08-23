@@ -32,8 +32,8 @@ def interface():
             file_manipulator(boolean)
         except AssertionError:
             messagebox.showerror("Error", "Inserted values do not respect the asked range.\nRe-input the beam's energy.")
-        except ValueError:
-            messagebox.showerror("Error", "Most entries accept integers or floats, although make sure the number of neutrons is an integer!")
+        #except ValueError:
+            #messagebox.showerror("Error", "Most entries accept integers or floats, although make sure the number of neutrons is an integer!")
         except Exception:
             messagebox.showerror("Error", "Make sure to fill every relevant entry!")
 
@@ -219,7 +219,6 @@ def interface():
             if side_moderator.get() == 'True': 
                 position = ((float(nnrpc.get()) + 1) * float(thickness_mod.get()) + float(nnrpc.get()) * thickness_rpc) / 2
                 sides = ['Left', 'Right', 'Top', 'Bottom']
-                #print(mods_lines)
                 for side in sides:
                     for line in mods_lines:
                         newline = line[:line.find('0')] + side + line[line.find('0') + 1:]
@@ -245,7 +244,6 @@ def interface():
                             newline = newline[:2 + newline.find('=')] + str(position) + newline[newline.find(' cm'):]
                         if line.find('/Color') >= 0:
                             newline = newline[:2 + newline.find('=')] + ' "purple"'
-                        #print(newline)
                         new_mods_lines.append(newline)
 
 
@@ -336,7 +334,7 @@ def interface():
 
     # Generating the main window
     main = tk.Tk()
-    main.geometry('850x430')
+    main.geometry(f"{main.winfo_screenwidth()}x{main.winfo_screenheight()}")
     main.title('TOPAS Automator')
     main.wm_iconphoto(True, ImageTk.PhotoImage(Image.open('DoNotDelete/topas.png')))
 
@@ -353,11 +351,11 @@ def interface():
 
     # Creating the frame where the logos will be
     frame_logos = tk.Frame(main)
-    frame_logos.pack(padx=15,side=tk.RIGHT, fill=tk.Y)
+    frame_logos.pack(padx=15, side=tk.RIGHT,fill=tk.Y)
 
     # Processing the logos
     logos = Image.open("DoNotDelete/logos_nobg.png")
-    logos.thumbnail((150,150))
+    logos.thumbnail((200,200))
     logos = ImageTk.PhotoImage(logos)
     logos_label = tk.Label(frame_logos, image = logos)
     logos_label.image = logos
@@ -375,7 +373,7 @@ def interface():
     ##check_axis=tk.OptionMenu(frame_initialsettings, axis, 'On', 'Off')
     ##check_axis.pack()
     check_axis = tk.Checkbutton(frame_initialsettings, text='Do you want to see the axes in the simulation?', variable=axis, offvalue='Off', onvalue='On')
-    check_axis.select() 
+    check_axis.deselect() 
     check_axis.pack()
 
     ##nnrpc=tk.StringVar()
@@ -392,10 +390,11 @@ def interface():
     frame_beamdist=tk.Frame(main)
     frame_beamdist.pack()
 
-    label_beamdist = tk.Label(frame_beamdist, text="Distance between the first RPC and the beam (in cm):")
+    label_beamdist = tk.Label(frame_beamdist, text="Distance between the first nRPC and the beam (in cm):")
     label_beamdist.pack(side=tk.LEFT)
 
     distance_rpc_beam = tk.Entry(frame_beamdist)
+    distance_rpc_beam.insert(0, '5')
     distance_rpc_beam.pack(side=tk.LEFT)
 
     frame_moderators1=tk.Frame(main)
@@ -419,12 +418,14 @@ def interface():
     label_thick.pack(side=tk.LEFT)
 
     thickness_mod = tk.Entry(frame_moderators2)
+    thickness_mod.insert(0, '2')
     thickness_mod.pack(side=tk.LEFT)
 
     label_dist = tk.Label(frame_moderators2, text="Distance between nRPCs (in cm):")
     #label_dist.pack(side=tk.LEFT)
 
     distance_rpc = tk.Entry(frame_moderators2)
+    distance_rpc.insert(0, '2')
     #distance_rpc.pack(side=tk.LEFT)
 
     frame_beam=tk.Frame(main)
@@ -434,10 +435,11 @@ def interface():
     label_beamenergy.grid(row=0, column=0)
 
     beam_energy = tk.Entry(frame_beam)
+    beam_energy.insert(0, '5')
     beam_energy.grid(row=0, column=1)
 
     units=tk.StringVar()
-    units.set('Units')
+    units.set('MeV')
     drop_units=tk.OptionMenu(frame_beam, units, 'eV', 'keV', 'MeV')
     drop_units.grid(row=0, column=2)
 
@@ -448,6 +450,7 @@ def interface():
     label_nneutrons.pack(side=tk.LEFT)
 
     nneutrons = tk.Entry(frame_quantity)
+    nneutrons.insert(0, '100')
     nneutrons.pack(side=tk.LEFT)
 
     # This final frame is special because it contains a label with the name of the file that will be generated
@@ -475,22 +478,102 @@ def interface():
             filename_strvar.set('Filename: '+"to_run.txt")
 
         return
+    
+    # Creating the setup preview
+    label_preview=tk.Label(frame_logos, text="\nSETUP'S PREVIEW", font=('bold'))
+    label_preview.pack()
+    
+    label=tk.Label(frame_logos, text="(top view)", font=('bold'))
+    label.pack()
+    
+    canvas_width=400
+    canvas_height=600
 
+    def draw_shapes():
+        
+        '''
+        This function creates a visualization in which it is possible to preview the setup where we are going to simulate.
+        '''
+        
+        preview.delete("all")
+        scale=10 # 1 cm = 10 points in canvas
+        try:
+            if moderator.get()=='False':
+                for nrpc in range(nnrpc.get()):
+                    # rpc shape
+                    preview.create_line(canvas_width/2-50, 
+                                    canvas_height-float(distance_rpc_beam.get())*scale-float(distance_rpc.get())*scale*(nrpc), 
+                                    canvas_width/2+50, 
+                                    canvas_height-float(distance_rpc_beam.get())*scale-float(distance_rpc.get())*scale*(nrpc), 
+                                    fill='aqua', width=4)  
+            if moderator.get()=='True':
+                # moderator shape
+                preview.create_rectangle(canvas_width/2-50, 
+                                        canvas_height-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()), 
+                                        canvas_width/2+50, 
+                                        canvas_height-float(distance_rpc_beam.get())*scale, 
+                                        fill='violet')
+                if side_moderator.get()=='True':
+                    # side moderator shapes
+                    preview.create_rectangle(canvas_width/2-50-scale*float(thickness_mod.get()),  
+                                            canvas_height-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()),
+                                            canvas_width/2-50, 
+                                            canvas_height-float(distance_rpc_beam.get())*scale, 
+                                            fill='purple') 
+                    preview.create_rectangle(canvas_width/2+50, 
+                                            canvas_height-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()),
+                                            canvas_width/2+50+float(thickness_mod.get())*scale,  
+                                            canvas_height-float(distance_rpc_beam.get())*scale,  
+                                            fill='purple')
+                for nrpc in range(nnrpc.get()):
+                    # rpc shape
+                    preview.create_line(canvas_width/2-50, 
+                                    canvas_height-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
+                                    canvas_width/2+50, 
+                                    canvas_height-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
+                                    fill='aqua', width=4)  # rpc shape
+        except:
+            ()
+
+        # beam shape
+        preview.create_line(canvas_width/2, canvas_height, canvas_width/2, canvas_height-float(distance_rpc_beam.get())*scale, fill='orange', width=2)
+        preview.create_rectangle(canvas_width/2-10, canvas_height-20, canvas_width/2+10, canvas_height, fill='black')
+        
+        # legend text
+        varx=425
+        vary=canvas_height
+        preview.create_text(canvas_width*1.5,567, font=("Arial", 12), fill="black",
+                    text='Blue lines: nRPCs\nOrange line: neutron beam\nViolet and purple boxes: paraffin moderators')
+        preview.create_oval(varx,vary-60, varx+12,vary-48, fill='aqua')
+        preview.create_oval(varx,vary-40, varx+12,canvas_height-28, fill='orange')
+        preview.create_oval(varx,canvas_height-20, varx+12,canvas_height-8, fill='purple')
+        preview.create_oval(varx-15,canvas_height-20, varx-3,canvas_height-8, fill='violet')      
+        
+        # axes picture
+        axis_img = ImageTk.PhotoImage(Image.open("DoNotDelete/axes.png"))
+        main.axis_img = axis_img
+        preview.create_image((674, 20), anchor='nw', image=axis_img)
+
+        return
+    
+
+    preview = tk.Canvas(frame_logos, width=800, height=canvas_height)
+    preview.pack()
 
     # This piece of code is particulary interesting because it triggers the function above everytime one of the chosen widgets is used
     for widget in [beam_energy,thickness_mod,nneutrons,distance_rpc_beam,distance_rpc, nnrpc]:
-        widget.bind('<KeyRelease>', update_filename)
+        widget.bind('<KeyRelease>', lambda event: (update_filename(), draw_shapes()))
     for widget in [drop_units]:
-        widget.bind('<Configure>', update_filename)
-    for widget in [moderators, check_axis, side_moderators]:
-        widget.bind('<ButtonRelease-1>', update_filename)
+        widget.bind('<Configure>', lambda event: (update_filename(), draw_shapes()))
+    for widget in [moderators, check_axis, side_moderators, nnrpc]:
+        widget.bind('<ButtonRelease-1>', lambda event: (update_filename(), draw_shapes()))
 
     # The buttons
     button_save = tk.Button(frame_final, text = "View content",font=("TkDefaultFont", 12, 'bold'), command =  lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
     button_run = tk.Button(frame_final, text = "Open with TOPAS",font=("TkDefaultFont", 12, 'bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.RIGHT)
 
     # Now we'll increase the size of every widget to make the interface bigger
-    for widget in [check_axis, label_rpc, nnrpc, label_beamdist, distance_rpc_beam, moderators, side_moderators, label_thick,
+    for widget in [check_axis, label_preview, label_rpc, nnrpc, label_beamdist, distance_rpc_beam, moderators, side_moderators, label_thick,
                    thickness_mod, label_dist, distance_rpc, label_beamenergy, beam_energy, drop_units, label_nneutrons, 
                    nneutrons, filename_label]:
         widget.config(font=my_font)

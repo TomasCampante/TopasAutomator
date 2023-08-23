@@ -115,12 +115,12 @@ def about_popup(tks):
     '''
     Generates a popup with general info about the program: history, creators, purpose...
     '''
-    
+
     popup_window = tk.Toplevel(tks)
     popup_window.title("About")
     popup_window.wm_iconphoto(True, ImageTk.PhotoImage(set_image_with_white_background('DoNotDelete/info.png')))
 
-    label = tk.Label(popup_window, text="Version 3.0.2")
+    label = tk.Label(popup_window, text="Version 4.0.2")
     label.pack(padx=10, pady=10)
 
     close_button = tk.Button(popup_window, text="Close", command=popup_window.destroy)
