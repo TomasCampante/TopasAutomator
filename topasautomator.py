@@ -480,10 +480,10 @@ def interface():
         return
     
     # Creating the setup preview
-    label_preview=tk.Label(frame_logos, text="\nSETUP'S PREVIEW", font=('bold'))
+    label_preview=tk.Label(frame_logos, text="\nSETUP'S PREVIEW", font=('', 13, 'bold'))
     label_preview.pack()
     
-    label=tk.Label(frame_logos, text="(top view)", font=('bold'))
+    label=tk.Label(frame_logos, text="(top view)")
     label.pack()
     
     canvas_width=400
@@ -498,45 +498,49 @@ def interface():
         preview.delete("all")
         scale=10 # 1 cm = 10 points in canvas
         try:
+            # beam shape
+            preview.create_line(canvas_width/2, canvas_height, canvas_width/2, canvas_height-20-float(distance_rpc_beam.get())*scale, fill='orange', width=2)
+ 
+            # moderators and rpcs
             if moderator.get()=='False':
                 for nrpc in range(nnrpc.get()):
                     # rpc shape
                     preview.create_line(canvas_width/2-50, 
-                                    canvas_height-float(distance_rpc_beam.get())*scale-float(distance_rpc.get())*scale*(nrpc), 
+                                    canvas_height-20-float(distance_rpc_beam.get())*scale-float(distance_rpc.get())*scale*(nrpc), 
                                     canvas_width/2+50, 
-                                    canvas_height-float(distance_rpc_beam.get())*scale-float(distance_rpc.get())*scale*(nrpc), 
+                                    canvas_height-20-float(distance_rpc_beam.get())*scale-float(distance_rpc.get())*scale*(nrpc), 
                                     fill='aqua', width=4)  
             if moderator.get()=='True':
                 # moderator shape
                 preview.create_rectangle(canvas_width/2-50, 
-                                        canvas_height-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()), 
+                                        canvas_height-20-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()), 
                                         canvas_width/2+50, 
-                                        canvas_height-float(distance_rpc_beam.get())*scale, 
+                                        canvas_height-20-float(distance_rpc_beam.get())*scale, 
                                         fill='violet')
                 if side_moderator.get()=='True':
                     # side moderator shapes
                     preview.create_rectangle(canvas_width/2-50-scale*float(thickness_mod.get()),  
-                                            canvas_height-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()),
+                                            canvas_height-20-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()),
                                             canvas_width/2-50, 
-                                            canvas_height-float(distance_rpc_beam.get())*scale, 
+                                            canvas_height-20-float(distance_rpc_beam.get())*scale, 
                                             fill='purple') 
                     preview.create_rectangle(canvas_width/2+50, 
-                                            canvas_height-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()),
+                                            canvas_height-20-float(distance_rpc_beam.get())*scale-scale*float(1+nnrpc.get())*float(thickness_mod.get()),
                                             canvas_width/2+50+float(thickness_mod.get())*scale,  
-                                            canvas_height-float(distance_rpc_beam.get())*scale,  
+                                            canvas_height-20-float(distance_rpc_beam.get())*scale,  
                                             fill='purple')
                 for nrpc in range(nnrpc.get()):
                     # rpc shape
                     preview.create_line(canvas_width/2-50, 
-                                    canvas_height-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
+                                    canvas_height-20-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
                                     canvas_width/2+50, 
-                                    canvas_height-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
+                                    canvas_height-20-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
                                     fill='aqua', width=4)  # rpc shape
+                       
         except:
             ()
 
-        # beam shape
-        preview.create_line(canvas_width/2, canvas_height, canvas_width/2, canvas_height-float(distance_rpc_beam.get())*scale, fill='orange', width=2)
+        # beam box
         preview.create_rectangle(canvas_width/2-10, canvas_height-20, canvas_width/2+10, canvas_height, fill='black')
         
         # legend text
@@ -560,20 +564,32 @@ def interface():
     preview = tk.Canvas(frame_logos, width=800, height=canvas_height)
     preview.pack()
 
+    def automatic_update(event):
+
+        '''
+        This function will be triggered when the widgets are changed.
+        '''
+        
+        update_filename()
+        widget.after(10, draw_shapes) # Execute draw_shapes after a 10 ms delay
+
+        return
+
+
     # This piece of code is particulary interesting because it triggers the function above everytime one of the chosen widgets is used
     for widget in [beam_energy,thickness_mod,nneutrons,distance_rpc_beam,distance_rpc, nnrpc]:
-        widget.bind('<KeyRelease>', lambda event: (update_filename(), draw_shapes()))
+        widget.bind('<KeyRelease>', automatic_update)
     for widget in [drop_units]:
-        widget.bind('<Configure>', lambda event: (update_filename(), draw_shapes()))
+        widget.bind('<Configure>', automatic_update)
     for widget in [moderators, check_axis, side_moderators, nnrpc]:
-        widget.bind('<ButtonRelease-1>', lambda event: (update_filename(), draw_shapes()))
+        widget.bind('<ButtonRelease-1>', automatic_update)
 
     # The buttons
     button_save = tk.Button(frame_final, text = "View content",font=("TkDefaultFont", 12, 'bold'), command =  lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
     button_run = tk.Button(frame_final, text = "Open with TOPAS",font=("TkDefaultFont", 12, 'bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.RIGHT)
 
     # Now we'll increase the size of every widget to make the interface bigger
-    for widget in [check_axis, label_preview, label_rpc, nnrpc, label_beamdist, distance_rpc_beam, moderators, side_moderators, label_thick,
+    for widget in [check_axis, label_rpc, nnrpc, label_beamdist, distance_rpc_beam, moderators, side_moderators, label_thick,
                    thickness_mod, label_dist, distance_rpc, label_beamenergy, beam_energy, drop_units, label_nneutrons, 
                    nneutrons, filename_label]:
         widget.config(font=my_font)
