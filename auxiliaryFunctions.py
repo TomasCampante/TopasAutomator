@@ -5,6 +5,7 @@ import subprocess
 import platform
 import webbrowser
 
+
 def opsys():
     
     return platform.system()
@@ -27,6 +28,8 @@ def open_file(filename):
         subprocess.call('xdg-open ' +filename, shell=True)
     else:
         messagebox.showerror("Error", "It was not possible to open the file because we could not identify your operative system.")
+        
+    return
                 
 
 def inbetween(lower, upper, value, units):

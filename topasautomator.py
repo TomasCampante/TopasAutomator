@@ -531,8 +531,7 @@ def interface():
                                     canvas_height-20-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
                                     canvas_width/2+50, 
                                     canvas_height-20-float(distance_rpc_beam.get())*scale-float(thickness_mod.get())*scale*(nrpc+1), 
-                                    fill='aqua', width=4)  # rpc shape
-                       
+                                    fill='aqua', width=4)       
         except:
             pass
 
