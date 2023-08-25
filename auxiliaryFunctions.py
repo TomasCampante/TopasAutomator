@@ -143,7 +143,7 @@ def about_popup(tks):
     popup_window.title("About")
     popup_window.wm_iconphoto(True, ImageTk.PhotoImage(set_image_with_white_background('DoNotDelete/info.png')))
 
-    label = tk.Label(popup_window, text="Version 4.1.2")
+    label = tk.Label(popup_window, text="TOPAS Automator was created by Tomás Campante (B.Sc. at the time) as part of one of many LIP internships at the NUC-RIA group, in the year of 2023.\nCarolina Felgueiras (M.Sc. at the time) was working with the detection of neutrons using resistive plate chambers and was running her simulations in the TOPAS framework.\nHer work required to run several simulations with different setups and this internship came as a way to help her automize this process.\n\n\nVersion 4.1.2")
     label.pack(padx=10, pady=10)
 
     close_button = tk.Button(popup_window, text="Close", command=popup_window.destroy)
