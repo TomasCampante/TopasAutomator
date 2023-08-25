@@ -2,13 +2,13 @@ s:Sc/EnergyAtGasGap00/Quantity                  = "EnergyDeposit"
 s:Sc/EnergyAtGasGap00/Component                 = "GasGap00"
 b:Sc/EnergyAtGasGap00/OutputToConsole           = "TRUE"
 s:Sc/EnergyAtGasGap00/IfOutputFileAlreadyExists = "Overwrite"
-d:Sc/EnergyATGasGap00/OnlyIncludeParticlesWithInitialKEAbove = 10. eV #verificar qual o valor de energia do Andrey
+d:Sc/EnergyAtGasGap00/OnlyIncludeIfIncidentParticleKEAbove = 100. keV
 
 s:Sc/EnergyAtGasGap01/Quantity                  = "EnergyDeposit"
 s:Sc/EnergyAtGasGap01/Component                 = "GasGap01"
 b:Sc/EnergyAtGasGap01/OutputToConsole           = "TRUE"
 s:Sc/EnergyAtGasGap01/IfOutputFileAlreadyExists = "Overwrite"
-d:Sc/EnergyATGasGap01/OnlyIncludeParticlesWithInitialKEAbove = 10. eV #verificar qual o valor de energia do Andrey 
+d:Sc/EnergyATGasGap01/OnlyIncludeIfIncidentParticleKEAbove = 100. keV
 
 ### PhaseSpace no GasGap00 ###
 
@@ -24,7 +24,7 @@ b:Sc/PSpace00/IncludePhysicalProcessName  = "True"
 b:Sc/PSpace00/IncludeEventID = "True"
 b:Sc/PSpace00/IncludeTrackID = "True"
 b:Sc/PSpace00/IncludeParentID = "False"
-b:Sc/PSpace00/IncludeStepNumber = "False"
+b:Sc/PSpace00/IncludeStepNumber = "True"
 b:Sc/PSpace00/IncludeGlobalTime = "False"
 b:Sc/PSpace00/IncludeEnergyDeposited = "True"
 b:Sc/PSpace00/IncludeVolumeName = "True"
@@ -44,7 +44,7 @@ b:Sc/PSpace01/IncludePhysicalProcessName  = "True"
 b:Sc/PSpace01/IncludeEventID = "True"
 b:Sc/PSpace01/IncludeTrackID = "True"
 b:Sc/PSpace01/IncludeParentID = "False"
-b:Sc/PSpace01/IncludeStepNumber = "False"
+b:Sc/PSpace01/IncludeStepNumber = "True"
 b:Sc/PSpace01/IncludeGlobalTime = "False"
 b:Sc/PSpace01/IncludeEnergyDeposited = "True"
 b:Sc/PSpace01/IncludeVolumeName = "True"
