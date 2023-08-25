@@ -2,13 +2,13 @@ s:Sc/EnergyAtGasGap00/Quantity                  = "EnergyDeposit"
 s:Sc/EnergyAtGasGap00/Component                 = "GasGap00"
 b:Sc/EnergyAtGasGap00/OutputToConsole           = "TRUE"
 s:Sc/EnergyAtGasGap00/IfOutputFileAlreadyExists = "Overwrite"
-d:Sc/EnergyATGasGap00/OnlyIncludeParticlesWithInitialKEAbove = 10. eV #verificar qual o valor de energia do Andrey
+d:Sc/EnergyATGasGap00/OnlyIncludeParticlesWithInitialKEAbove = 100. eV #verificar qual o valor de energia do Andrey
 
 s:Sc/EnergyAtGasGap01/Quantity                  = "EnergyDeposit"
 s:Sc/EnergyAtGasGap01/Component                 = "GasGap01"
 b:Sc/EnergyAtGasGap01/OutputToConsole           = "TRUE"
 s:Sc/EnergyAtGasGap01/IfOutputFileAlreadyExists = "Overwrite"
-d:Sc/EnergyATGasGap01/OnlyIncludeParticlesWithInitialKEAbove = 10. eV #verificar qual o valor de energia do Andrey 
+d:Sc/EnergyATGasGap01/OnlyIncludeParticlesWithInitialKEAbove = 100. eV #verificar qual o valor de energia do Andrey 
 
 ### PhaseSpace no GasGap00 ###
 
