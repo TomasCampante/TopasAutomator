@@ -98,7 +98,7 @@ def interface():
                 if beamposition_index==0:
                     to_write[index]=line[:2+line.find('=')]+'-'+str(float(distance_rpc_beam.get()))+line[line.find(' cm'):]
                 if boxsize_index==0:
-                    to_write[index]=line[:2+line.find('=')]+str(5+float(distance_rpc.get())*float(nnrpc.get()))+line[line.find(' cm'):]
+                    to_write[index]=line[:2+line.find('=')]+str(float(distance_rpc_beam.get())+float(distance_rpc.get())*float(nnrpc.get()))+line[line.find(' cm'):]
                 if axis_index==0:
                     if axis.get()=='On':
                         to_write[index]='b:Gr/ViewA/IncludeAxes ="True" \n'
@@ -186,7 +186,7 @@ def interface():
                 if beamposition_index==0:
                     to_write[index]=line[:2+line.find('=')]+'-'+str(float(distance_rpc_beam.get()))+line[line.find(' cm'):]
                 if boxsize_index==0:
-                    to_write[index]=line[:2+line.find('=')]+str(5+0.2*float(nnrpc.get())+float(thickness_mod.get())*(float(nnrpc.get())+1))+line[line.find(' cm'):]
+                    to_write[index]=line[:2+line.find('=')]+str(float(distance_rpc_beam.get())+0.2*float(nnrpc.get())+float(thickness_mod.get())*(float(nnrpc.get())+1))+line[line.find(' cm'):]
                     if side_moderator.get()=='True':
                         to_write[index-1]=to_write[index-1][:2+line.find('=')]+str(5+2*float(thickness_mod.get()))+line[line.find(' cm'):]
                         to_write[index-2]=to_write[index-2][:2+line.find('=')]+str(5+2*float(thickness_mod.get()))+line[line.find(' cm'):]
@@ -309,19 +309,12 @@ def interface():
         newfile.close()
 
 	    # When the program is being run in the terminal (!), it will open the file or TOPAS with the file that was created.
-        if boolean:
+        if boolean is True:
             subprocess.call('bash -i -c "topas '+filename+'"', shell=True)
+        if boolean is False:
+            aux.open_file(filename)
         else:
-            system=aux.opsys()
-            if system == 'Windows':
-                subprocess.call('start ' +filename, shell=True)
-            elif system == 'Darwin':
-                subprocess.call('open ' +filename, shell=True)
-            elif system == 'Linux':
-                subprocess.call('xdg-open ' +filename, shell=True)
-            else:
-                messagebox.showerror("Error", "It was not possible to open the file because we could not identify your operative system.")
-                
+            pass   
          
         return    
             
@@ -369,17 +362,9 @@ def interface():
     frame_initialsettings.pack(pady=(10,0))
 
     axis=tk.StringVar()
-    ##axis.set('Axis')
-    ##check_axis=tk.OptionMenu(frame_initialsettings, axis, 'On', 'Off')
-    ##check_axis.pack()
     check_axis = tk.Checkbutton(frame_initialsettings, text='Do you want to see the axes in the simulation?', variable=axis, offvalue='Off', onvalue='On')
     check_axis.deselect() 
     check_axis.pack()
-
-    ##nnrpc=tk.StringVar()
-    ##nnrpc.set('Number of nRPCs')
-    ##drop_rpcs=tk.OptionMenu(frame_initialsettings, nnrpc, 1, 3, 5, 10)
-    ##drop_rpcs.pack()
     
     label_rpc = tk.Label(frame_initialsettings, text="Number of nRPCs:")
     label_rpc.pack(side=tk.LEFT)
@@ -479,6 +464,7 @@ def interface():
 
         return
     
+    
     # Creating the setup preview
     label_preview=tk.Label(frame_logos, text="\nSETUP'S PREVIEW", font=('', 13, 'bold'))
     label_preview.pack()
@@ -496,8 +482,18 @@ def interface():
         '''
         
         preview.delete("all")
+        
         scale=10 # 1 cm = 10 points in canvas
+        
         try:
+            # re-scalling if needed
+            if 20+float(distance_rpc_beam.get())*scale+scale*float(1+nnrpc.get())*float(thickness_mod.get())>canvas_height:
+                scale=((-20+canvas_height)*scale)/(20+float(distance_rpc_beam.get())*scale+scale*float(1+nnrpc.get())*float(thickness_mod.get()))
+            
+            # scale shape
+            preview.create_line(650-20-scale/2, 50, 650-20+scale/2, 50, fill='black',width=3)
+            preview.create_text(650-20, 40, text="1 cm")
+            
             # beam shape
             preview.create_line(canvas_width/2, canvas_height, canvas_width/2, canvas_height-20-float(distance_rpc_beam.get())*scale, fill='orange', width=2)
  
@@ -538,7 +534,7 @@ def interface():
                                     fill='aqua', width=4)  # rpc shape
                        
         except:
-            ()
+            pass
 
         # beam box
         preview.create_rectangle(canvas_width/2-10, canvas_height-20, canvas_width/2+10, canvas_height, fill='black')
@@ -585,8 +581,9 @@ def interface():
         widget.bind('<ButtonRelease-1>', automatic_update)
 
     # The buttons
-    button_save = tk.Button(frame_final, text = "View content",font=("TkDefaultFont", 12, 'bold'), command =  lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
-    button_run = tk.Button(frame_final, text = "Open with TOPAS",font=("TkDefaultFont", 12, 'bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.RIGHT)
+    button_save = tk.Button(frame_final, text = "Save file",font=("TkDefaultFont", 12, 'bold'), command =  lambda:run_topas(None)).pack(padx=60,side=tk.LEFT)
+    button_view = tk.Button(frame_final, text = "View content",font=("TkDefaultFont", 12, 'bold'), command = lambda:run_topas(False)).pack(padx=60,side=tk.LEFT)
+    button_open = tk.Button(frame_final, text = "Open with TOPAS",font=("TkDefaultFont", 12, 'bold'), command = lambda:run_topas(True)).pack(padx=60,side=tk.LEFT)
 
     # Now we'll increase the size of every widget to make the interface bigger
     for widget in [check_axis, label_rpc, nnrpc, label_beamdist, distance_rpc_beam, moderators, side_moderators, label_thick,

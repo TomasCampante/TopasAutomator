@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from PIL import ImageTk, Image
 import subprocess
 import platform
@@ -8,6 +9,25 @@ def opsys():
     
     return platform.system()
 
+def open_file(filename):
+    
+    '''
+    This fucntion opens a file with the default file viewer.
+    
+    Requires: filename is a string with the format filename.pdf .
+    Ensures: the file open, empty return; if we cant detect the OS, messagebox pops up.
+    '''
+
+    system=opsys()
+    if system == 'Windows':
+        subprocess.call('start ' +filename, shell=True)
+    elif system == 'Darwin':
+        subprocess.call('open ' +filename, shell=True)
+    elif system == 'Linux':
+        subprocess.call('xdg-open ' +filename, shell=True)
+    else:
+        messagebox.showerror("Error", "It was not possible to open the file because we could not identify your operative system.")
+                
 
 def inbetween(lower, upper, value, units):
 
@@ -120,7 +140,7 @@ def about_popup(tks):
     popup_window.title("About")
     popup_window.wm_iconphoto(True, ImageTk.PhotoImage(set_image_with_white_background('DoNotDelete/info.png')))
 
-    label = tk.Label(popup_window, text="Version 4.0.2")
+    label = tk.Label(popup_window, text="Version 4.1.2")
     label.pack(padx=10, pady=10)
 
     close_button = tk.Button(popup_window, text="Close", command=popup_window.destroy)
@@ -142,6 +162,9 @@ def help_popup(tks):
     label = tk.Label(popup_window, text="To learn more about TOPAS Automator,\n left-click on any of these text to read our user guide!")
     label.pack(padx=10, pady=10)
     label.bind("<Button-1>", lambda event:webbrowser.open("https://nuc-ria.notion.site/TOPAS-Automator-User-Guide-4d8877b8c534433aa655322c855499a0"))
+
+    userguide_button=tk.Button(popup_window, text="Open User Guide as .pdf file", command = lambda:open_file('DoNotDelete/TOPASAutomator_UserGuide.pdf'))
+    userguide_button.pack(pady=10)
 
     close_button = tk.Button(popup_window, text="Close", command=popup_window.destroy)
     close_button.pack(pady=10)
