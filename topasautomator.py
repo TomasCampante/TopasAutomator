@@ -27,7 +27,7 @@ def interface():
         '''
 
         try:
-            aux.inbetween('2.5 eV', '6 MeV', str(beam_energy.get())+' '+str(units.get()), 'eV')
+            aux.inbetween('2.5 eV', '7 MeV', str(beam_energy.get())+' '+str(units.get()), 'eV')
             
             file_manipulator(boolean)
         except AssertionError:
