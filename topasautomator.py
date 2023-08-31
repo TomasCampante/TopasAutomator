@@ -301,9 +301,9 @@ def interface():
         # Saving the new compiled file with all the new variables
         filename="to_run.txt"
         if moderator.get()=='True':
-            filename='rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_sidemoderators-'+str(side_moderator.get())+'_'+str(thickness_mod.get())+'cm_'+str(beam_energy.get())+str(units.get())+".txt"
+            filename='rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_sidemoderators-'+str(side_moderator.get())+'_'+str(thickness_mod.get())+'cm_'+str(beam_energy.get())+str(units.get())+'_'+str(nneutrons.get())+".txt"
         else:
-            filename='rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_'+str(beam_energy.get())+str(units.get())+".txt"
+            filename='rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_'+str(beam_energy.get())+str(units.get())+str(nneutrons.get())+".txt"
         newfile=open(filename, 'w') 
         newfile.writelines(to_write)
         newfile.close()
@@ -416,7 +416,7 @@ def interface():
     frame_beam=tk.Frame(main)
     frame_beam.pack()
 
-    label_beamenergy = tk.Label(frame_beam, text="Beam's energy (from 2.5e-6 to 6 MeV):")
+    label_beamenergy = tk.Label(frame_beam, text="Beam's energy (from 2.5e-6 to 7 MeV):")
     label_beamenergy.grid(row=0, column=0)
 
     beam_energy = tk.Entry(frame_beam)
@@ -456,9 +456,9 @@ def interface():
 
         if beam_energy.get()!='' or thickness_mod.get()!='' or nneutrons.get()!='' or distance_rpc_beam.get()!='' or nnrpc.get()!='' or units.get()!='Units':
             if moderator.get()=='True':
-                filename_strvar.set('Filename: '+'rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_sidemoderators-'+str(side_moderator.get())+'_'+str(thickness_mod.get())+'cm_'+str(beam_energy.get())+str(units.get())+".txt")
+                filename_strvar.set('Filename: '+'rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_sidemoderators-'+str(side_moderator.get())+'_'+str(thickness_mod.get())+'cm_'+str(beam_energy.get())+str(units.get())+'_'+str(nneutrons.get())+".txt")
             else:
-                filename_strvar.set('Filename: '+'rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_'+str(beam_energy.get())+str(units.get())+".txt")
+                filename_strvar.set('Filename: '+'rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_'+str(beam_energy.get())+str(units.get())+'_'+str(nneutrons.get())+".txt")
         else:
             filename_strvar.set('Filename: '+"to_run.txt")
 
@@ -487,8 +487,10 @@ def interface():
         
         try:
             # re-scalling if needed
-            if 20+float(distance_rpc_beam.get())*scale+scale*float(1+nnrpc.get())*float(thickness_mod.get())>canvas_height:
+            if moderator.get()=='True' and 20+float(distance_rpc_beam.get())*scale+scale*float(1+nnrpc.get())*float(thickness_mod.get())>canvas_height:
                 scale=((-20+canvas_height)*scale)/(20+float(distance_rpc_beam.get())*scale+scale*float(1+nnrpc.get())*float(thickness_mod.get()))
+            if moderator.get()=='False' and 20+float(distance_rpc_beam.get())*scale+float(distance_rpc.get())*scale*(nnrpc.get())>canvas_height:
+                scale=((-20+canvas_height)*scale)/(20+float(distance_rpc_beam.get())*scale+float(distance_rpc.get())*scale*(nnrpc.get()))            
             
             # scale shape
             preview.create_line(650-20-scale/2, 50, 650-20+scale/2, 50, fill='black',width=3)

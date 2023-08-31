@@ -23,6 +23,7 @@ d:Gr/ViewA/PerspectiveAngle = 30 deg
 u:Gr/ViewA/Zoom             = 1.
 d:Gr/ViewA/AxesSize = 5. cm # size of axes
 s:Gr/ViewA/ColorBy = "ParticleType"
+#b:Gr/ViewA/Active       = "false"
 
 #sv:Ph/Default/Modules = 1 "g4h-phy_QGSP_BIC_HP"
 sv:Ph/Default/Modules = 5 "g4h-elastic_HP", "g4h-phy_FTFP_BERT_HP", "g4h-phy_QGSP_BIC_HP", "g4h-phy_QGSP_BERT_HP", "g4h-phy_QGSP_BIC_AllHP"
