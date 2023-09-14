@@ -303,7 +303,7 @@ def interface():
         if moderator.get()=='True':
             filename='rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_sidemoderators-'+str(side_moderator.get())+'_'+str(thickness_mod.get())+'cm_'+str(beam_energy.get())+str(units.get())+'_'+str(nneutrons.get())+".txt"
         else:
-            filename='rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_'+str(beam_energy.get())+str(units.get())+str(nneutrons.get())+".txt"
+            filename='rpc-'+str(nnrpc.get())+'_moderators-'+str(moderator.get())+'_'+str(beam_energy.get())+str(units.get())+'_'+str(nneutrons.get())+".txt"
         newfile=open(filename, 'w') 
         newfile.writelines(to_write)
         newfile.close()
@@ -369,7 +369,7 @@ def interface():
     label_rpc = tk.Label(frame_initialsettings, text="Number of nRPCs:")
     label_rpc.pack(side=tk.LEFT)
 
-    nnrpc = tk.Scale(frame_initialsettings, from_=1, to=10, orient=tk.HORIZONTAL, length=200)
+    nnrpc = tk.Scale(frame_initialsettings, from_=1, to=15, orient=tk.HORIZONTAL, length=200)
     nnrpc.pack(side=tk.LEFT)
     
     frame_beamdist=tk.Frame(main)
@@ -403,7 +403,7 @@ def interface():
     label_thick.pack(side=tk.LEFT)
 
     thickness_mod = tk.Entry(frame_moderators2)
-    thickness_mod.insert(0, '2')
+    thickness_mod.insert(0, '1')
     thickness_mod.pack(side=tk.LEFT)
 
     label_dist = tk.Label(frame_moderators2, text="Distance between nRPCs (in cm):")

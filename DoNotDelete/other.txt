@@ -1,6 +1,6 @@
 ### World ###
 s:Ge/World/Type     = "TsBox"
-s:Ge/World/Material = "Vacuum"
+s:Ge/World/Material = "Air"
 d:Ge/World/HLX      = 5. cm
 d:Ge/World/HLY      = 5. cm
 d:Ge/World/HLZ      = 5. cm
